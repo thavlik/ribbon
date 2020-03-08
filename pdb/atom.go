@@ -35,6 +35,7 @@ type Atom struct {
 
 func ParseAtom(line string) *Atom {
 	atom := Atom{}
+	l := len(line)
 	atom.Serial = parseInt(line[6:11])
 	atom.Name = parseString(line[12:16])
 	atom.AltLoc = parseString(line[16:17])
@@ -48,6 +49,8 @@ func ParseAtom(line string) *Atom {
 	atom.Z = parseFloat(line[46:54])
 	atom.Occupancy = parseFloat(line[54:60])
 	atom.TempFactor = parseFloat(line[60:66])
-	atom.Charge = parseString(line[78:80])
+	if l >= 80 {
+		atom.Charge = parseString(line[78:80])
+	}
 	return &atom
 }
